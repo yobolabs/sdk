@@ -5,7 +5,7 @@
  *
  * @example
  * ```typescript
- * import { createRepository } from '@yobo/framework/db';
+ * import { createRepository } from '@yobolabs/framework/db';
  *
  * const campaignRepo = createRepository('campaigns', {
  *   orgScoped: true
@@ -15,25 +15,24 @@
  * ```
  */
 
-export { createRepository } from './repository';
-export { withRLSContext } from './context';
 export {
-  configureDatabaseContext,
-  type DatabaseConfig,
-  type DatabaseProvider,
-  type OrgContextExtractor,
-  type RLSContextSetter,
+    configureDatabaseContext,
+    type DatabaseConfig,
+    type DatabaseProvider,
+    type OrgContextExtractor,
+    type RLSContextSetter
 } from './configure';
-export type { Repository, RepositoryOptions, BaseFilters } from './types';
+export { withRLSContext } from './context';
+export { createRepository } from './repository';
+export type { BaseFilters, Repository, RepositoryOptions } from './types';
 
 // RLS context management (NEW)
 export {
-  getDbContext,
-  createServiceContextWithDb,
+    createServiceContextWithDb, getDbContext
 } from './rls-context';
 export type {
-  DbContext,
-  SqlTemplate,
+    DbContext,
+    SqlTemplate
 } from './rls-context';
 
 // Internal implementation details remain hidden

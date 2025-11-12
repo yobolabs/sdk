@@ -1,10 +1,13 @@
 {
-  "name": "@yobo/framework",
+  "name": "@yobolabs/framework",
   "version": "1.0.0",
   "description": "Core infrastructure abstractions for Yobo Platform",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

@@ -5,7 +5,7 @@
  *
  * @example
  * ```typescript
- * import { createRouter, createRouteGroup, configureRouterFactory } from '@yobo/framework/router';
+ * import { createRouter, createRouteGroup, configureRouterFactory } from '@yobolabs/framework/router';
  *
  * // Configure once during app initialization
  * configureRouterFactory({
@@ -24,19 +24,12 @@
  */
 
 export {
-  createRouter,
-  createRouteGroup,
-  configureRouterFactory,
-  createRouterFactory,
+    configureRouterFactory, createRouteGroup, createRouter, createRouterFactory
 } from './factory';
 
 export type {
-  RouterContext,
-  RouteHandler,
-  RouteDefinition,
-  RouterConfig,
-  TRPCAdapter,
-  TRPCProcedureBuilder,
+    RouteDefinition, RouteHandler, RouterConfig, RouterContext, TRPCAdapter,
+    TRPCProcedureBuilder
 } from './types';
 
 // Internal procedure creation logic is NOT exported

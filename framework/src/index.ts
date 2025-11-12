@@ -1,5 +1,5 @@
 /**
- * @yobo/framework - Cross-cutting concerns for Next.js 15 applications
+ * @yobolabs/framework - Cross-cutting concerns for Next.js 15 applications
  *
  * This SDK provides horizontal utilities that every module needs:
  * - RLS context management
@@ -19,130 +19,85 @@
 
 // RLS Context Management
 export {
-  withRLSContext,
-  getRLSContext,
-  // requireRLSContext, // TODO: implement
-  // setRLSContext, // TODO: implement
-  type RLSContext,
+    getRLSContext, withRLSContext,
+    // requireRLSContext, // TODO: implement
+    // setRLSContext, // TODO: implement
+    type RLSContext
 } from './rls';
 
 // Audit Logging
 export {
-  auditLog,
-  getAuditTrail,
-  calculateChanges,
-  type AuditEntry,
-  type AuditAction,
-  type AuditContext,
+    auditLog, calculateChanges, getAuditTrail, type AuditAction,
+    type AuditContext, type AuditEntry
 } from './audit';
 
 // Event System
 export {
-  publishEvent,
-  // publishEvents, // TODO: implement batch publishing
-  type DomainEvent,
-  // type EventMetadata, // TODO: add metadata types
-  // type EventPayload, // TODO: add payload types
+    publishEvent,
+    // publishEvents, // TODO: implement batch publishing
+    type DomainEvent
 } from './events';
 
 // Caching Utilities (Next.js 15 compatible)
 export {
-  withCache,
-  invalidateCache,
-  invalidateKey,
-  invalidatePattern,
-  revalidateTag,
-  revalidatePath,
-  type CacheOptions,
-  type CacheKey,
+    invalidateCache,
+    invalidateKey,
+    invalidatePattern, revalidatePath, revalidateTag, withCache, type CacheKey, type CacheOptions
 } from './cache';
 
 // Telemetry & Monitoring
 export {
-  withTelemetry,
-  trackMetric,
-  trackEvent,
-  captureError,
-  type MetricType,
-  type TelemetryContext,
+    captureError, trackEvent, trackMetric, withTelemetry, type MetricType,
+    type TelemetryContext
 } from './telemetry';
 
 // Permission Checking (kept from original)
-export type {
-  Permission,
-  PermissionContext,
-  PermissionHandler,
-  PermissionCheckOptions,
-} from './permissions';
 export {
-  requirePermission,
-  requireAnyPermission,
-  requireAllPermissions,
-  checkPermission,
-  checkAnyPermission,
-  checkAllPermissions,
-  getMissingPermissions,
+    checkAllPermissions, checkAnyPermission, checkPermission, getMissingPermissions, requireAllPermissions, requireAnyPermission, requirePermission
+} from './permissions';
+export type {
+    Permission, PermissionCheckOptions, PermissionContext,
+    PermissionHandler
 } from './permissions';
 
 // Authentication Helpers (kept from original)
-export type { Session, User, AuthContext, AuthAdapter } from './auth';
 export {
-  configureAuth,
-  getSession,
-  switchOrg,
-  requireAuth,
-  isAuthenticated,
-  getCurrentUser,
-  getCurrentOrgId,
+    configureAuth, getCurrentOrgId, getCurrentUser, getSession, isAuthenticated, requireAuth, switchOrg
 } from './auth';
+export type { AuthAdapter, AuthContext, Session, User } from './auth';
 
 // Actor Pattern (NEW - Core auth infrastructure)
 export {
-  createActor,
-  hasPermission as actorHasPermission,
-  requirePermission as actorRequirePermission,
-  canAccessOrg,
-  validateOrgContext,
-  createServiceContext,
-  hasActor,
-  isPlatformSystemRole,
-  SYSTEM_ROLES,
-  ADMIN_PERMISSIONS,
-  AuthError,
+    ADMIN_PERMISSIONS,
+    AuthError, SYSTEM_ROLES, hasPermission as actorHasPermission,
+    requirePermission as actorRequirePermission,
+    canAccessOrg, createActor, createServiceContext,
+    hasActor,
+    isPlatformSystemRole, validateOrgContext
 } from './auth';
 export type {
-  Actor,
-  ActorContext,
-  DbAccessOptions,
-  ServiceContext,
+    Actor,
+    ActorContext,
+    DbAccessOptions,
+    ServiceContext
 } from './auth';
 
 // tRPC Security Layers (NEW - Standard procedures)
 export {
-  createTRPCProcedures,
-  createTRPCRouter,
-  authMiddleware,
-  orgContextMiddleware,
-  adminOnlyMiddleware,
-  permissionMiddleware,
+    adminOnlyMiddleware, authMiddleware, createTRPCProcedures,
+    createTRPCRouter, orgContextMiddleware, permissionMiddleware
 } from './trpc';
 export type {
-  TRPCContext,
-  AuthenticatedContext,
-  PublicProcedure,
-  ProtectedProcedure,
-  OrgProtectedProcedure,
-  AdminOnlyProcedure,
+    AdminOnlyProcedure, AuthenticatedContext, OrgProtectedProcedure, ProtectedProcedure, PublicProcedure, TRPCContext
 } from './trpc';
 
 // Database RLS Context (NEW - For Actor pattern)
 export {
-  getDbContext,
-  createServiceContextWithDb,
+    createServiceContextWithDb, getDbContext
 } from './db/rls-context';
 export type {
-  DbContext,
-  SqlTemplate,
+    DbContext,
+    SqlTemplate
 } from './db/rls-context';
 
 // Multi-tenant Configuration - TODO: Implement
@@ -171,20 +126,13 @@ export type {
 
 // Repository Patterns (interfaces only, not implementations)
 export type {
-  DomainRepository,
-  AuditableRepository,
-  SoftDeletableRepository,
-  VersionedRepository,
+    AuditableRepository, DomainRepository, SoftDeletableRepository,
+    VersionedRepository
 } from './patterns';
 
 // Next.js 15 Specific Utilities
 export {
-  withServerAction,
-  withRouteHandler,
-  withMiddleware,
-  getCachedData,
-  type ServerActionContext,
-  type RouteHandlerContext,
+    getCachedData, withMiddleware, withRouteHandler, withServerAction, type RouteHandlerContext, type ServerActionContext
 } from './nextjs';
 
 // Validation Utilities - TODO: Implement

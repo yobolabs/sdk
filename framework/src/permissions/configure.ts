@@ -5,7 +5,6 @@
  * enabling integration with existing permission systems.
  */
 
-import type { Permission, PermissionContext } from './types';
 
 /**
  * Permission checker function type
@@ -72,7 +71,7 @@ let permissionConfig: PermissionConfig | null = null;
  *
  * @example
  * ```typescript
- * import { configurePermissions } from '@yobo/framework/permissions';
+ * import { configurePermissions } from '@yobolabs/framework/permissions';
  * import { hasPermission } from './auth';
  *
  * configurePermissions({

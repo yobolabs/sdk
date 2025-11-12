@@ -7,12 +7,12 @@
  * - orgProtectedProcedure: Authentication + org context required
  * - adminOnlyProcedure: Platform admin access only
  *
- * @module @yobo/framework/trpc/procedures
+ * @module @yobolabs/framework/trpc/procedures
  */
 
 import { TRPCError, initTRPC } from '@trpc/server';
 import type { Actor } from '../auth/actor';
-import { createActor, hasPermission, validateOrgContext, AuthError } from '../auth/actor';
+import { AuthError, createActor, hasPermission, validateOrgContext } from '../auth/actor';
 
 /**
  * Context type required for procedures

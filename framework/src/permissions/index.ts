@@ -5,7 +5,7 @@
  *
  * @example
  * ```typescript
- * import { requirePermission, checkPermission } from '@yobo/framework/permissions';
+ * import { requirePermission, checkPermission } from '@yobolabs/framework/permissions';
  *
  * // Decorator pattern
  * const handler = requirePermission('campaign:create', async (ctx, input) => {
@@ -21,29 +21,20 @@
  */
 
 export {
-  requirePermission,
-  requireAnyPermission,
-  requireAllPermissions,
+    requireAllPermissions, requireAnyPermission, requirePermission
 } from './require';
 
 export {
-  checkPermission,
-  checkAnyPermission,
-  checkAllPermissions,
-  getMissingPermissions,
+    checkAllPermissions, checkAnyPermission, checkPermission, getMissingPermissions
 } from './check';
 
 export {
-  configurePermissions,
-  type PermissionConfig,
-  type PermissionChecker,
-  type PermissionGetter,
-  type SuperUserChecker,
+    configurePermissions, type PermissionChecker, type PermissionConfig, type PermissionGetter,
+    type SuperUserChecker
 } from './configure';
 
 export type {
-  Permission,
-  PermissionContext,
-  PermissionHandler,
-  PermissionCheckOptions,
+    Permission, PermissionCheckOptions, PermissionContext,
+    PermissionHandler
 } from './types';
+
