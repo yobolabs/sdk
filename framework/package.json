@@ -1,6 +1,6 @@
 {
   "name": "@yobolabs/framework",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "Core infrastructure abstractions for Yobo Platform",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
