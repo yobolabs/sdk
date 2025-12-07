@@ -201,6 +201,7 @@ export function createRoleRouterConfig(options: CreateRoleRouterConfigOptions = 
     getAllRolesSystem: {
       type: "query" as const,
       permission: "admin:manage",
+      crossOrg: true, // Bypass RLS to see all roles including system roles (org_id = NULL)
       input: roleFiltersSchema
         .extend({
           orgId: z.number().optional(),
@@ -557,6 +558,7 @@ export function createRoleRouterConfig(options: CreateRoleRouterConfigOptions = 
     // =========================================================================
     copyRole: {
       permission: "admin:manage",
+      crossOrg: true, // Bypass RLS to copy roles across organizations
       input: copyRoleSchema,
       invalidates: invalidationTags,
       entityType: "role",
