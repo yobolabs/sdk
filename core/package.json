@@ -1,6 +1,6 @@
 {
   "name": "@yobolabs/core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Core SDK components, UI primitives, and utilities for Yobo Platform",
   "type": "module",
   "publishConfig": {
