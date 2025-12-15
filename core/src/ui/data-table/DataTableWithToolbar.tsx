@@ -229,6 +229,8 @@ export interface DataTableWithToolbarConfig<TData> {
   pageSizeOptions?: number[];
   /** Default page size */
   defaultPageSize?: number;
+  /** Initial column visibility state (e.g., { columnId: false } to hide a column by default) */
+  initialColumnVisibility?: VisibilityState;
 }
 
 /**
@@ -320,6 +322,7 @@ export function createDataTableWithToolbar<TData>(
     renderSelectionInfo,
     pageSizeOptions = [10, 20, 30, 40, 50],
     defaultPageSize = 10,
+    initialColumnVisibility = {},
   } = config;
 
   const {
@@ -393,7 +396,7 @@ export function createDataTableWithToolbar<TData>(
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [globalFilter, setGlobalFilter] = useState('');
     const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(initialColumnVisibility);
     const [density, setDensity] = useState<'compact' | 'comfortable' | 'spacious'>('comfortable');
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogAction, setDialogAction] = useState<string | null>(null);

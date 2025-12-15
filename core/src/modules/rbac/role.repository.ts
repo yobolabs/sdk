@@ -98,8 +98,14 @@ export class RoleRepository {
       conditions.push(eq(this.roles.isActive, filters.isActive));
     }
 
-    // System role filter
-    if (typeof filters.isSystemRole === "boolean") {
+    // System role filter - CRITICAL: Always exclude system roles for non-system users
+    // This is the primary security gate to prevent system roles from being shown
+    // in tenant UI. The check is applied regardless of what's passed in filters.
+    if (!includeSystemRoles) {
+      // Explicitly exclude system roles when not authorized to view them
+      conditions.push(eq(this.roles.isSystemRole, false));
+    } else if (typeof filters.isSystemRole === "boolean") {
+      // Only apply filter value when user IS authorized to view system roles
       conditions.push(eq(this.roles.isSystemRole, filters.isSystemRole));
     }
 
@@ -118,14 +124,17 @@ export class RoleRepository {
     }
 
     // Default org scope for non-system operations
+    // This ensures tenant users only see:
+    // 1. Org-specific roles (org_id = current_org)
+    // 2. Global roles (org_id IS NULL AND is_global_role = true)
+    // System roles are already excluded by the isSystemRole condition above
     if (!includeSystemRoles && orgId) {
       conditions.push(
         or(
           eq(this.roles.orgId, orgId), // Org-specific roles
           and(
             isNull(this.roles.orgId), // Global roles have null orgId
-            eq(this.roles.isGlobalRole, true), // Must be global role
-            eq(this.roles.isSystemRole, false) // But NOT system role
+            eq(this.roles.isGlobalRole, true) // Must be global role
           )
         )!
       );

@@ -193,6 +193,7 @@ export const SYSTEM_ROLES = {
   ADMIN: "Admin",
   OPERATIONS_SPECIALIST: "Operations Specialist",
   CUSTOMER_SERVICE: "Customer Service",
+  API_KEY: "API Key",
 } as const;
 
 /**

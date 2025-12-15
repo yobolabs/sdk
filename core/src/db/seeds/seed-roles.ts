@@ -112,10 +112,13 @@ export async function seedRoles(
 
           const mappingKey = `${roleId}-${permission.id}`;
           if (!existingMappingSet.has(mappingKey)) {
+            // For system/global roles (roleOrgId === null), keep org_id as null
+            // For org-specific roles, use the role's org_id or default
+            const mappingOrgId = roleOrgId === null ? null : (roleOrgId ?? defaultOrgId);
             mappingsToInsert.push({
               roleId,
               permissionId: permission.id,
-              orgId: roleOrgId ?? defaultOrgId,
+              orgId: mappingOrgId,
             });
           }
         }
@@ -154,10 +157,13 @@ export async function seedRoles(
             continue;
           }
 
+          // For system/global roles (newRole.orgId === null), keep org_id as null
+          // For org-specific roles, use the role's org_id or default
+          const mappingOrgId = newRole.orgId === null ? null : (newRole.orgId ?? defaultOrgId);
           mappingsToInsert.push({
             roleId: newRole.id,
             permissionId: permission.id,
-            orgId: newRole.orgId ?? defaultOrgId,
+            orgId: mappingOrgId,
           });
         }
       }

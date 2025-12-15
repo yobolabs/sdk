@@ -372,10 +372,27 @@ export function createAuthRouterConfig(deps: AuthRouterDeps) {
           }
         });
 
+        // Debug logging for permission resolution
+        if (process.env.NODE_ENV === 'development' || process.env.DEBUG_AUTH === 'true') {
+          console.log(`getCurrentUser: Found ${userRoleAssignments.length} role assignments for user ${numericUserId}`);
+          userRoleAssignments.forEach((assignment: any, idx: number) => {
+            const rolePermsCount = assignment.role?.rolePermissions?.length ?? 0;
+            const adminPerms = assignment.role?.rolePermissions?.filter((rp: any) =>
+              rp.permission?.slug?.startsWith('admin:')
+            ).length ?? 0;
+            console.log(`  Role ${idx + 1}: ${assignment.role?.name ?? 'unknown'} - ${rolePermsCount} total permissions, ${adminPerms} admin permissions`);
+          });
+        }
+
         // Aggregate all unique permissions
         const allPermissions = userRoleAssignments.flatMap((assignment: any) => {
           if (!assignment.role || !assignment.role.rolePermissions) {
-            console.warn('Role or rolePermissions missing for assignment:', assignment);
+            console.warn('Role or rolePermissions missing for assignment:', JSON.stringify({
+              roleId: assignment.roleId,
+              roleName: assignment.role?.name,
+              hasRole: !!assignment.role,
+              hasRolePermissions: !!assignment.role?.rolePermissions
+            }));
             return [];
           }
 
@@ -439,8 +456,12 @@ export function createAuthRouterConfig(deps: AuthRouterDeps) {
           updatedAt: user.updatedAt,
         };
 
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`getCurrentUser successful: ${result.email}, permissions: ${result.permissions.length}, roles: ${result.roles.length}, orgs: ${result.availableOrgs.length}`);
+        if (process.env.NODE_ENV === 'development' || process.env.DEBUG_AUTH === 'true') {
+          const adminPerms = result.permissions.filter((p: any) => p.slug?.startsWith('admin:'));
+          console.log(`getCurrentUser successful: ${result.email}, permissions: ${result.permissions.length} (${adminPerms.length} admin), roles: ${result.roles.length}, orgs: ${result.availableOrgs.length}`);
+          if (adminPerms.length > 0) {
+            console.log(`  Admin permissions: ${adminPerms.map((p: any) => p.slug).join(', ')}`);
+          }
         }
 
         return result;

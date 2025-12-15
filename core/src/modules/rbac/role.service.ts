@@ -185,13 +185,19 @@ export class RoleService {
     const orgId =
       ctx.isSystemUser && includeSystemRoles ? undefined : ctx.orgId ?? undefined;
 
+    // The repository's buildRoleConditions handles system role exclusion
+    // based on includeSystemRoles flag. When includeSystemRoles is false,
+    // it automatically adds isSystemRole = false condition.
+    // When includeSystemRoles is true, users can optionally filter by isSystemRole.
     return await repo.list({
       limit,
       offset,
       filters: {
         search,
         isActive,
-        isSystemRole: includeSystemRoles ? isSystemRole : false, // Never show system roles unless allowed
+        // Only pass isSystemRole filter when user is authorized to view system roles
+        // The repository will automatically exclude system roles when not authorized
+        isSystemRole: includeSystemRoles ? isSystemRole : undefined,
       },
       includeStats,
       includePermissions,
