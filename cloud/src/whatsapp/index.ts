@@ -5,7 +5,7 @@
  *
  * @example
  * ```typescript
- * import { whatsapp } from '@yobolabs/cloud/whatsapp';
+ * import { whatsapp } from '@jetdevs/cloud/whatsapp';
  *
  * // Send a template message
  * const result = await whatsapp.sendTemplateMessage({
@@ -28,22 +28,13 @@
 
 // Types
 export type {
-  WabaConfig,
-  WhatsAppCredentials,
-  WhatsAppTokenResponse,
-  MediaUploadResponse,
-  MediaUploadOptions,
-  TemplateComponent,
-  CreateTemplateRequest,
-  CreateTemplateResponse,
-  TemplateStatusOptions,
-  TemplateStatusResponse,
-  DeleteTemplateOptions,
-  SendTemplateMessageRequest,
-  SendCarouselMessageRequest,
-  SendMessageResponse,
   CarouselCard,
-  ConfigCheckResult,
+  ConfigCheckResult, CreateTemplateRequest,
+  CreateTemplateResponse, DeleteTemplateOptions, MediaUploadOptions, MediaUploadResponse, SendCarouselMessageRequest,
+  SendMessageResponse, SendTemplateMessageRequest, TemplateComponent, TemplateStatusOptions,
+  TemplateStatusResponse, WabaConfig,
+  WhatsAppCredentials,
+  WhatsAppTokenResponse
 } from './types';
 
 // Classes

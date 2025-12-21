@@ -1,7 +1,7 @@
 {
-  "name": "@yobolabs/cloud",
+  "name": "@jetdevs/cloud",
   "version": "1.0.4-dev",
-  "description": "AWS S3 and cloud service integrations for Yobo Platform",
+  "description": "AWS S3 and cloud service integrations for Jetdevs Platform",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "publishConfig": {
@@ -48,7 +48,7 @@
     "cloud",
     "storage"
   ],
-  "author": "Yobo",
+  "author": "Jetdevs",
   "license": "PRIVATE",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.940.0",

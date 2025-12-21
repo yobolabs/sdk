@@ -5,10 +5,10 @@
  *
  * ```typescript
  * // Old way (deprecated)
- * import { uploadFileToS3, downloadFileFromS3 } from '@yobolabs/cloud/s3';
+ * import { uploadFileToS3, downloadFileFromS3 } from '@jetdevs/cloud/s3';
  *
  * // New way (recommended)
- * import { storage } from '@yobolabs/cloud/storage';
+ * import { storage } from '@jetdevs/cloud/storage';
  *
  * // Migration guide:
  * // uploadFileToS3(params)        -> storage.uploadBuffer(buffer, filename, options)

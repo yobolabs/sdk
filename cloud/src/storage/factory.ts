@@ -121,7 +121,7 @@ export function resetStorageClient(): void {
  *
  * Usage:
  * ```ts
- * import { storage } from '@yobolabs/cloud/storage';
+ * import { storage } from '@jetdevs/cloud/storage';
  * await storage.uploadBuffer(buffer, 'test.txt');
  * ```
  */

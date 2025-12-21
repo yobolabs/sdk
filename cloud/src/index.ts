@@ -1,28 +1,22 @@
 /**
- * @yobolabs/cloud - Cloud service integrations
+ * @jetdevs/cloud - Cloud service integrations
  *
- * Provides AWS service wrappers for the Yobo platform.
- *
- * @example
- * ```ts
- * // Simple usage with convenience export
- * import { storage } from '@yobolabs/cloud/storage';
- *
- * const result = await storage.uploadBuffer(buffer, 'image.png', { folder: 'uploads' });
- * console.log(result.url);
- *
- * // Or create your own client
- * import { createStorageClient } from '@yobolabs/cloud/storage';
- * const client = createStorageClient();
- * await client.upload({ buffer, key: 'uploads/file.txt' });
- * ```
+ * Provides S3 storage operations for file upload, download, and management.
+ * Supports multi-tenant configurations with org-based path prefixes.
  */
 
-// Re-export storage module
-export * from './storage';
+export {
+    // S3 Client and Configuration
+    createS3Client,
+    // Delete Operations
+    deleteFileFromS3,
+    deleteMultipleFilesFromS3,
+    // Download Operations
+    downloadFileFromS3,
+    getPresignedUrl, getS3Client,
+    isS3Configured, S3_CONFIG, uploadBase64Image,
+    // Upload Operations
+    uploadFileToS3, type DeleteResult, type DownloadResult, type S3ClientConfig, type UploadFileParams,
+    type UploadResult
+} from './s3';
 
-// Re-export config module
-export * from './config';
-
-// Re-export lib module
-export * from './lib';

@@ -2,14 +2,14 @@
  * SDK Logger
  *
  * Provides consistent logging with environment-aware output.
- * Logs are prefixed with [@yobolabs/cloud] for easy filtering.
+ * Logs are prefixed with [@jetdevs/cloud] for easy filtering.
  */
 
 import { detectEnvironment } from './env';
 
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 
-const LOG_PREFIX = '[@yobolabs/cloud]';
+const LOG_PREFIX = '[@jetdevs/cloud]';
 
 /**
  * Check if debug logging is enabled

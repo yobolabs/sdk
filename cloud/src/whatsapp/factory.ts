@@ -57,7 +57,7 @@ export function resetWhatsAppClient(): void {
  *
  * Usage:
  * ```ts
- * import { whatsapp } from '@yobolabs/cloud/whatsapp';
+ * import { whatsapp } from '@jetdevs/cloud/whatsapp';
  * await whatsapp.sendTemplateMessage({ ... });
  *
  * // With WABA config for multi-tenant
