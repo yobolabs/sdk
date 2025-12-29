@@ -1,6 +1,6 @@
 {
   "name": "@jetdevs/core",
-  "version": "0.1.9-dev",
+  "version": "0.1.10-dev",
   "description": "Core SDK components, UI primitives, and utilities for Jetdevs Platform",
   "type": "module",
   "publishConfig": {
@@ -191,7 +191,7 @@
     }
   },
   "scripts": {
-    "build": "tsup",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' tsup",
     "dev": "tsup --watch",
     "test": "vitest",
     "lint": "eslint src/",
