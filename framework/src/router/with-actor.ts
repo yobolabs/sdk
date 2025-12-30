@@ -543,11 +543,19 @@ export function createRouterWithActor<TDb = any>(
       // When ctx.lockedOrgId is set (e.g., on custom domains), we prevent
       // input.orgId from overriding the org context. This is a generic
       // mechanism that apps can use for any org-locking scenario.
+      //
+      // EXCEPTION: Routes with crossOrg: true are exempt from this enforcement.
+      // These routes explicitly need to access data across organizations
+      // (e.g., getAvailableRoles needs to see global roles with orgId=null,
+      // getUserOrganizations needs to see all orgs a user belongs to).
+      // The crossOrg flag already handles RLS bypass appropriately.
       // =======================================================================
       const lockedOrgId = (ctx as any).lockedOrgId as number | undefined;
       let targetOrgId = input?.orgId;
 
-      if (lockedOrgId !== undefined) {
+      // Skip lockedOrgId enforcement for crossOrg routes
+      // These routes are explicitly designed to access data across organizations
+      if (lockedOrgId !== undefined && !route.crossOrg) {
         if (targetOrgId && targetOrgId !== lockedOrgId) {
           // SECURITY: Log the attempted bypass
           console.error('[SECURITY] Attempted org override with locked context:', {

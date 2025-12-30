@@ -80,10 +80,16 @@ export interface OrgRepositorySchema {
     orgId: any;
     isActive: any;
     createdAt: any;
+    updatedAt: any;   // Used by addUser handler for reactivation
+    assignedBy: any;  // Used by addUser handler for audit trail
   };
   roles: PgTable & {
     id: any;
     name: any;
+    orgId: any;        // Used by addUser for org-specific role lookup
+    isActive: any;     // Used by addUser to filter active roles only
+    isGlobalRole: any; // Used by addUser for global role lookup
+    isSystemRole: any; // Used for system role identification
   };
   orgAuditLogs: PgTable & {
     id: any;

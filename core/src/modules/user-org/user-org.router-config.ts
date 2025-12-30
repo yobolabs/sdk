@@ -206,6 +206,7 @@ export function createUserOrgRouterConfig(deps: UserOrgRouterFactoryDeps) {
       input: assignRoleSchema,
       invalidates: ['user-org', 'roles'],
       entityType: 'user_role',
+      crossOrg: true, // Required to assign roles in organizations other than the current one
       repository: Repository,
       handler: async (context: HandlerContext<{ userId: number; orgId: number; roleId: number }>) => {
         const { input, service, repo } = context;
@@ -253,6 +254,7 @@ export function createUserOrgRouterConfig(deps: UserOrgRouterFactoryDeps) {
       input: removeRoleSchema,
       invalidates: ['user-org', 'roles'],
       entityType: 'user_role',
+      crossOrg: true, // Required to remove roles from organizations other than the current one
       repository: Repository,
       handler: async (context: HandlerContext<{ userId: number; orgId: number; roleId: number }>) => {
         const { input, repo } = context;
@@ -358,6 +360,7 @@ export function createUserOrgRouterConfig(deps: UserOrgRouterFactoryDeps) {
       type: 'query' as const,
       permission: 'user:read',
       input: getUserRolesAllOrgsSchema,
+      crossOrg: true, // Required to see user's roles across ALL organizations
       repository: Repository,
       handler: async (context: HandlerContext<{ userId: number }>) => {
         const { input, repo } = context;

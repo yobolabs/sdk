@@ -185,6 +185,7 @@ export function createUserRouterConfig(deps: UserRouterDeps) {
     getAllUsersSystem: {
       type: 'query' as const,
       permission: 'admin:manage',
+      crossOrg: true, // Required to see user roles across ALL organizations, not just current org
       input: userFiltersSchema,
       repository: deps.Repository,
       handler: async ({ input, service, repo, db }: UserHandlerContext<z.infer<typeof userFiltersSchema>>) => {
@@ -319,6 +320,11 @@ export function createUserRouterConfig(deps: UserRouterDeps) {
           return existing;
         }
 
+        // Hash password before storing
+        const hashedPassword = input.password
+          ? await deps.hashPassword(input.password, 10)
+          : undefined;
+
         // Create new user
         const newUser = await repo.create(db, {
           name: input.name,
@@ -327,7 +333,7 @@ export function createUserRouterConfig(deps: UserRouterDeps) {
           email: input.email,
           phone: input.phone,
           username: input.username,
-          password: input.password,
+          password: hashedPassword,
           isActive: input.isActive,
           currentOrgId: service.orgId,
         });
@@ -367,6 +373,11 @@ export function createUserRouterConfig(deps: UserRouterDeps) {
           throw new UserRouterError('CONFLICT', 'User with this email already exists');
         }
 
+        // Hash password before storing
+        const hashedPassword = input.password
+          ? await deps.hashPassword(input.password, 10)
+          : undefined;
+
         // Create new user
         const newUser = await repo.create(db, {
           name: input.name,
@@ -375,7 +386,7 @@ export function createUserRouterConfig(deps: UserRouterDeps) {
           email: input.email,
           phone: input.phone,
           username: input.username,
-          password: input.password,
+          password: hashedPassword,
           isActive: input.isActive,
           currentOrgId: input.orgId,
         });
