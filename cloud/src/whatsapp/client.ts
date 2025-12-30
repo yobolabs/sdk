@@ -384,11 +384,12 @@ export class WhatsAppClient {
    * @param params - Send template message request with optional WABA config
    */
   async sendTemplateMessage(params: SendTemplateMessageRequest): Promise<SendMessageResponse> {
-    const { templateId, phoneNumber, imageUrl, metadata, bodyParameters, wabaId, senderLabel, mediaType, buttons } =
+    const { templateId, phoneNumber, imageUrl, metadata, bodyParameters, wabaId, senderLabel, mediaType, buttons, documentFilename } =
       params;
 
     // Determine effective media type (default to 'image' for backwards compatibility)
     const effectiveMediaType = mediaType || 'image';
+    const isDocument = effectiveMediaType === 'document';
     const isVideo = effectiveMediaType === 'video';
 
     log.debug('Sending template message', {
@@ -398,6 +399,7 @@ export class WhatsAppClient {
       mediaType: effectiveMediaType,
       hasButtons: !!buttons && buttons.length > 0,
       buttonCount: buttons?.length || 0,
+      documentFilename: isDocument ? documentFilename : undefined,
       wabaId,
     });
 
@@ -411,7 +413,15 @@ export class WhatsAppClient {
     // Build header parameters based on media type
     const headerParameters = imageUrl
       ? [
-          isVideo
+          isDocument
+            ? {
+                type: 'document',
+                document: {
+                  link: imageUrl,
+                  filename: documentFilename || 'document.pdf',
+                },
+              }
+            : isVideo
             ? {
                 type: 'video',
                 video: {
